@@ -1,12 +1,4 @@
-/*
-COLORS:
-
-Light green: #7ed56f
-Medium green: #55c57a
-Dark green: #28b485
-
-*/
-
+@charset "UTF-8";
 *,
 *::after,
 *::before {
@@ -26,35 +18,25 @@ body {
   line-height: 1.7;
   color: #777;
   padding: 3rem;
-
   box-sizing: border-box;
 }
 
 .header {
   height: 95vh;
-  background-image: linear-gradient(
-      to right bottom,
-      rgba(126, 213, 111, 0.8),
-      rgba(40, 180, 131, 0.8)
-    ),
-    url(../img/hero.jpg);
+  background-image: linear-gradient(to right bottom, rgba(126, 213, 111, 0.8), rgba(40, 180, 133, 0.8)), url(../img/hero.jpg);
   background-size: cover;
   background-position: top;
   position: relative;
-
   clip-path: polygon(0 0, 100% 0, 100% 75vh, 0 100%);
 }
-
 .header__logo-box {
   position: absolute;
   top: 4rem;
   left: 4rem;
 }
-
 .header__logo {
   height: 3.5rem;
 }
-
 .header__text-box {
   position: absolute;
   top: 40%;
@@ -68,35 +50,29 @@ body {
 .heading-primary {
   color: #fff;
   text-transform: uppercase;
-
   backface-visibility: hidden;
   margin-bottom: 6rem;
 }
-
 .heading-primary--main {
   display: block;
   font-size: 6rem;
   font-weight: 400;
   letter-spacing: 3.5rem;
   margin-right: -3.5rem;
-
   animation-name: moveInLeft;
   animation-duration: 1s;
   animation-timing-function: ease-out;
-
   /*
   animation-delay: 3s;
   animation-iteration-count: 3;
   */
 }
-
 .heading-primary--sub {
   display: block;
   font-size: 2rem;
   font-weight: 700;
   letter-spacing: 1.75rem;
   margin-right: -1.75rem;
-
   animation: moveInRight 1s ease-out;
 }
 
@@ -105,48 +81,43 @@ body {
     opacity: 0;
     transform: translateX(-10rem);
   }
-
   80% {
     transform: translateX(1rem);
   }
-
   100% {
     opacity: 1;
     transform: translate(0);
   }
 }
-
 @keyframes moveInRight {
   0% {
     opacity: 0;
     transform: translateX(10rem);
   }
-
   80% {
     transform: translateX(-1rem);
   }
-
   100% {
     opacity: 1;
     transform: translate(0);
   }
 }
-
 @keyframes moveInBottom {
   0% {
     opacity: 0;
     transform: translateY(3rem);
   }
-
   100% {
     opacity: 1;
     transform: translate(0);
   }
 }
-
-/* 링크 기본 그 자체, 이미 방문한 링크 */
-.btn:link,
-.btn:visited {
+.btn {
+  /* 링크 기본 그 자체, 이미 방문한 링크 */
+  /* 마우스 올렸을 때 */
+  /* 클릭했을 때 */
+}
+.btn:link, .btn:visited {
   text-transform: uppercase;
   text-decoration: none;
   padding: 1.5rem 4rem;
@@ -158,25 +129,27 @@ body {
   position: relative;
   font-size: 1.6rem;
 }
-
-/* 마우스 올렸을 때 */
 .btn:hover {
   transform: translateY(-3px);
   /* box-shadow: x축 y축 그림자사이즈 그림자색 */
   box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.2);
 }
-
-/* 클릭했을 때 */
+.btn:hover::after {
+  /* 사이즈가 커진다. */
+  transform: scaleX(1.4) scaleY(1.6);
+  opacity: 0;
+}
 .btn:active {
   transform: translateY(-1px);
   box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.2);
 }
-
 .btn--white {
   background-color: #fff;
   color: #777;
 }
-
+.btn--white::after {
+  background-color: #fff;
+}
 .btn::after {
   /* content가 빈칸이라도 지정을 해줘야하고 */
   /* display도 ::after를 쓰려면 지정해줘야한다. 여기서는 버튼을 이미 inline-block으로 사용중이었기 때문에 똑같이 해줬다 */
@@ -191,20 +164,11 @@ body {
   z-index: -1;
   transition: all 0.4s;
 }
-
-.btn--white::after {
-  background-color: #fff;
-}
-
-.btn:hover::after {
-  /* 사이즈가 커진다. */
-  transform: scaleX(1.4) scaleY(1.6);
-  opacity: 0;
-}
-
 .btn--animated {
   /* 애니메이션이름 진행시간 스타일 딜레이 */
   animation: moveInBottom 0.5s ease-out 0.75;
   /* 애니메이션이 시작할 때 모든 요소를 0으로 맞추고 진행한다 */
   animation-fill-mode: backwards;
 }
+
+/*# sourceMappingURL=style.css.map */
