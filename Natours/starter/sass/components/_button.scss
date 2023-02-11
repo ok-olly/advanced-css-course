@@ -1,0 +1,92 @@
+.btn {
+  /* 링크 기본 그 자체, 이미 방문한 링크 */
+  &:link,
+  &:visited {
+    text-transform: uppercase;
+    text-decoration: none;
+    padding: 1.5rem 4rem;
+    /* 패딩이나 높이, 가로 이런걸 주고 싶으면 inline-block */
+    /* 이게 아니면 바로 위에 있는 텍스트랑 조금 겹치는 부분이 생긴다. */
+    display: inline-block;
+    border-radius: 10rem;
+    transition: all 0.2s;
+    position: relative;
+    font-size: $default-font-size;
+  }
+
+  /* 마우스 올렸을 때 */
+  &:hover {
+    transform: translateY(-3px);
+    /* box-shadow: x축 y축 그림자사이즈 그림자색 */
+    box-shadow: 0 1rem 2rem rgba($color-black, 0.2);
+
+    &::after {
+      /* 사이즈가 커진다. */
+      transform: scaleX(1.4) scaleY(1.6);
+      opacity: 0;
+    }
+  }
+
+  /* 클릭했을 때 */
+  &:active {
+    transform: translateY(-1px);
+    box-shadow: 0 0.5rem 1rem rgba($color-black, 0.2);
+  }
+
+  &--white {
+    background-color: $color-white;
+    color: $color-grey-dark;
+
+    &::after {
+      background-color: $color-white;
+    }
+  }
+
+  &::after {
+    /* content가 빈칸이라도 지정을 해줘야하고 */
+    /* display도 ::after를 쓰려면 지정해줘야한다. 여기서는 버튼을 이미 inline-block으로 사용중이었기 때문에 똑같이 해줬다 */
+    content: "";
+    display: inline-block;
+    height: 100%;
+    width: 100%;
+    border-radius: 10rem;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: -1;
+    transition: all 0.4s;
+  }
+
+  &--animated {
+    /* 애니메이션이름 진행시간 스타일 딜레이 */
+    animation: moveInBottom 0.5s ease-out 0.75;
+    /* 애니메이션이 시작할 때 모든 요소를 0으로 맞추고 진행한다 */
+    animation-fill-mode: backwards;
+  }
+}
+
+.btn-text {
+  &:link,
+  &:visited {
+    font-size: $default-font-size;
+    color: $color-primary;
+    display: inline-block;
+    text-decoration: none;
+    border-bottom: 1px solid $color-primary;
+    padding: 3px;
+    transition: all 0.2s;
+  }
+
+  &:hover {
+    background-color: $color-primary;
+    color: $color-white;
+    // box-shadow: x축 y축 그림자사이즈 색
+    box-shadow: 0 1rem 2rem rgba($color-black, 0.15);
+    transform: translateY(-2px);
+  }
+
+  &:active {
+    box-shadow: 0 0.5rem 1rem rgba($color-black, 0.15);
+    transform: translateY(0);
+  }
+}
