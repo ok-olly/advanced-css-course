@@ -1,0 +1,202 @@
+.card {
+  // FUNCTIONALITY
+
+  // 카드가 돌아가는데 정말 그럴듯한 효과를 주려면 부모요소에 perspective를 주고
+  // 자식 요소에 카드 디자인을 해준다.
+  // perspecitve에 작은 수를 넣으면 효과가 너무 크게 나타남.. 큰 수를 넣기!!
+  perspective: 150rem;
+  // 파이어폭스에서도 실행되게 하려고..
+  -moz-perspective: 150rem;
+  position: relative;
+  // 원래 높이를 자식 요소에만 넣어줬었는데 그렇게 하니까 perspective 효과가 사라져버렸음 그래서 부모요소인 얘한테도 똑같은 값을 추가로 넣어줬음
+  height: 52rem;
+
+  &__side {
+    height: 52rem;
+    transition: all 0.8s ease;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    // 뒷면 안 보이게 하려고
+    backface-visibility: hidden;
+    border-radius: 3px;
+    // overflow는 상자 크기보다 글 길게 작성됐을 때 스크롤 달건지말건지 댕강 자를건지 말건지 고를 수 있는거
+    // 부모요소에서 border-radius 지정해놨는데 자식 요소에 넣은 이미지 파일은 귀퉁이가 그대로 나와버린다. 그래서 overflow: hidden으로 부모요소를 넘어가버리는 부부은 그냥 잘라버림
+    overflow: hidden;
+    box-shadow: 0 1.5rem 4rem rgba($color-black, 0.15);
+
+    &--front {
+      background-color: $color-white;
+    }
+
+    &--back {
+      // 얘는 시작할 때 이미 뒤집어져 있어야함
+      transform: rotateY(180deg);
+
+      &-1 {
+        background-image: linear-gradient(
+          to right bottom,
+          $color-secondary-light,
+          $color-secondary-dark
+        );
+      }
+
+      &-2 {
+        background-image: linear-gradient(
+          to right bottom,
+          $color-primary-light,
+          $color-primary-dark
+        );
+      }
+
+      &-3 {
+        background-image: linear-gradient(
+          to right bottom,
+          $color-tertiary-light,
+          $color-tertiary-dark
+        );
+      }
+    }
+  }
+
+  &:hover &__side--front {
+    // 카드가 돌아가는 효과
+    transform: rotateY(-180deg);
+  }
+
+  &:hover &__side--back {
+    // 카드가 돌아가는 효과
+    transform: rotateY(0);
+  }
+
+  // FRONT SIDE STYLING
+  &__picture {
+    background-size: cover;
+    height: 23rem;
+    // 배경색이랑 배경이미지 합성하는 기능. screen 말고도 많음
+    background-blend-mode: screen;
+    -webkit-clip-path: polygon(0 0, 100% 0, 100% 85%, 0 100%);
+    clip-path: polygon(0 0, 100% 0, 100% 85%, 0 100%);
+    border-top-left-radius: 3px;
+    border-top-right-radius: 3px;
+
+    &--1 {
+      background-image: linear-gradient(
+          to right bottom,
+          $color-secondary-light,
+          $color-secondary-dark
+        ),
+        url(../img/nat-5.jpg);
+    }
+    &--2 {
+      background-image: linear-gradient(
+          to right bottom,
+          $color-primary-light,
+          $color-primary-dark
+        ),
+        url(../img/nat-6.jpg);
+    }
+    &--3 {
+      background-image: linear-gradient(
+          to right bottom,
+          $color-tertiary-light,
+          $color-tertiary-dark
+        ),
+        url(../img/nat-7.jpg);
+    }
+  }
+
+  &__heading {
+    font-size: 2.8rem;
+    font-weight: 300;
+    text-transform: uppercase;
+    text-align: right;
+    color: $color-white;
+    position: absolute;
+    top: 12rem;
+    right: 2rem;
+    width: 75%;
+  }
+
+  &__heading-span {
+    // 이렇게 하면 the sea explorer의 the 앞이랑 explorer의 뒤만 패딩이 적용되는데
+    padding: 1rem 1.5rem;
+    // 이걸 쓰면 두 줄로 나눠서 각각 스타일이 적용된다.
+    -webkit-box-decoration-break: clone;
+    box-decoration-break: clone;
+
+    &--1 {
+      background-image: linear-gradient(
+        to right bottom,
+        rgba($color-secondary-light, 0.85),
+        rgba($color-secondary-dark, 0.85)
+      );
+    }
+
+    &--2 {
+      background-image: linear-gradient(
+        to right bottom,
+        rgba($color-primary-light, 0.85),
+        rgba($color-primary-dark, 0.85)
+      );
+    }
+
+    &--3 {
+      background-image: linear-gradient(
+        to right bottom,
+        rgba($color-tertiary-light, 0.85),
+        rgba($color-tertiary-dark, 0.85)
+      );
+    }
+  }
+
+  &__details {
+    padding: 3rem;
+
+    ul {
+      list-style: none;
+      width: 80%;
+      // block을 가운데 정렬하기 위함
+      margin: 0 auto;
+
+      li {
+        text-align: center;
+        font-size: 1.5rem;
+        padding: 1rem;
+
+        &:not(:last-child) {
+          border-bottom: 1px solid $color-grey-light-2;
+        }
+      }
+    }
+  }
+
+  // BACK SIDE STYLING
+  &__cta {
+    // 이렇게 하면 왼쪽 위 꼭지점이 한 가운데 위치하는데
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    // 원하는건 꼭지점이 가운데에 가는게 아니라 이 요소가 가운데로 가는것이기 때문에 transform을 사용해서 자기 자신의 가로 길이 절반, 세로 길이 절반만큼 반대로 이동하게 지정
+    transform: translate(-50%, -50%);
+    width: 90%;
+    text-align: center;
+  }
+
+  &__price-box {
+    text-align: center;
+    color: $color-white;
+    margin-bottom: 8rem;
+  }
+
+  &__price-only {
+    font-size: 1.4rem;
+    text-transform: uppercase;
+  }
+
+  &__price-value {
+    font-size: 6rem;
+    font-weight: 100;
+  }
+}

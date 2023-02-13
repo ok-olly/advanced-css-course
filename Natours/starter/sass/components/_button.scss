@@ -42,6 +42,15 @@
     }
   }
 
+  &--green {
+    background-color: $color-primary;
+    color: $color-white;
+
+    &::after {
+      background-color: $color-white;
+    }
+  }
+
   &::after {
     /* content가 빈칸이라도 지정을 해줘야하고 */
     /* display도 ::after를 쓰려면 지정해줘야한다. 여기서는 버튼을 이미 inline-block으로 사용중이었기 때문에 똑같이 해줬다 */
