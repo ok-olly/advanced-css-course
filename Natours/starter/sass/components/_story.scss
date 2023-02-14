@@ -1,0 +1,70 @@
+.story {
+  width: 75%;
+  margin: 0 auto;
+  box-shadow: 0 3rem 6rem rgba($color-black, 0.1);
+  background-color: rgba($color-white, 0.6);
+  border-radius: 3px;
+  padding: 6rem;
+  // 밑에서 왼쪽으로 3만큼 transform한거때문에 똑같이 3만큼 패딩을 추가로 더해줌
+  padding-left: 9rem;
+  font-size: $default-font-size;
+  transform: skewX(-12deg);
+
+  //  찌그러진 모양 만드려고 .story에 transform: skewX(-12deg);넣고 자식요소 다 선택해서 반대로 입력하면 보통 해결되는데 이 파트 경우 자식요소 중에 __shape가 벌써 transform 프로퍼티를 가지고 있어서 skewX랑 translate가 동시에 적용이 안됨.. 그래서 어쩔 수 없이 걍 자식 요소마다 skewX(-12deg);를 직접 적어줘야함
+  //   & > * {
+  //     transform: skewX(12deg);
+  //   }
+
+  &__shape {
+    width: 15rem;
+    height: 15rem;
+    float: left;
+    // shape-outside: circle(라디우스% at 50% 50%);
+    // 왜 at 50% 50%인지는 숫자를 바꿔봐도 어떻게 작동하는건지 잘 모르겠음
+    // 얘는 설명하기 조금 그렇네 걍 노션 사진으로 첨부
+    // 이거 쓰려면 float, width, height와 같이 써야함
+    -webkit-shape-outside: circle(50% at 50% 50%);
+    shape-outside: circle(50% at 50% 50%);
+    -webkit-clip-path: circle(50% at 50% 50%);
+    clip-path: circle(50% at 50% 50%);
+    // float된 거는 transform으로 마진 주는게 좋음
+    transform: translateX(-3rem) skewX(12deg);
+    position: relative;
+  }
+
+  &__img {
+    // 얘는 이미 __shape의 자식요소이기 때문에 100%라고만 적어도 부모요소에 있는 height를 잘 가져옴
+    height: 100%;
+    transform: translateX(-4rem) scale(1.4);
+    // backface-visibility: hidden;
+    transition: all 0.5s;
+  }
+
+  &__text {
+    transform: skewX(12deg);
+  }
+
+  &__caption {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, 20%);
+    color: $color-white;
+    text-transform: uppercase;
+    font-size: 1.7rem;
+    text-align: center;
+    opacity: 0;
+    transition: all 0.5s;
+    backface-visibility: hidden;
+  }
+
+  &:hover &__caption {
+    opacity: 1;
+    transform: translate(-50%, -50%);
+  }
+
+  &:hover &__img {
+    transform: translateX(-4rem) scale(1);
+    filter: blur(3px) brightness(80%);
+  }
+}
