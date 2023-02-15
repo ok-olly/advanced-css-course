@@ -1,0 +1,108 @@
+.form {
+  &__group:not(:last-child) {
+    margin-bottom: 2rem;
+  }
+
+  &__input {
+    font-size: 1.5rem;
+    // 폰트를 부모요소에서 상속
+    font-family: inherit;
+    color: inherit;
+    padding: 1.5rem 2rem;
+    border-radius: 2px;
+    background-color: rgba($color-white, 0.5);
+    border: none;
+    // focus 부분에만 아래 이거를 넣었더니 선택될 때마다 인풋부분이 밑으로 3px씩 밀려나가서 여기에도 같은 속성을 넣고 대신 색을 transparent로 해서 안 보이게 함
+    border-bottom: 3px solid transparent;
+    width: 90%;
+    display: block;
+    transition: all 0.3s;
+
+    // 인풋부분이 선택되면 파란 테두리가 생기는데 사실 그것도 :focus를 이용해서 꾸밀 수 있다. 마우스 :hover랑 비슷
+    &:focus {
+      outline: none;
+      box-shadow: 0 1rem 2rem rgba($color-black, 0.1);
+      border-bottom: 3px solid $color-primary;
+    }
+
+    // 인풋부분에 올바른 내용이 들어가지 않은 경우 즉 이름부분에 텍스트가 입력이 안됐거나 이메일부분에 이메일 형식으로 입력이 안된 경우
+    &:focus:invalid {
+      border-bottom: 3px solid $color-secondary-dark;
+    }
+
+    &::-webkit-input-placeholder {
+      color: $color-grey-dark-2;
+    }
+  }
+
+  &__label {
+    font-size: 1.2rem;
+    font-weight: 700;
+    margin: 2rem;
+    margin-top: 0.7rem;
+    display: block;
+    transition: all 0.3s;
+  }
+
+  // 형제요소 선택자를 사용하고 싶을 떄는 html에 꼭 input 먼저 쓰고 label을 뒤에 사용해야한다.
+  // +는 바로 옆에 있는 형제요소 선택할 때
+  // ~는 떨어져있는 형제요소 선택할 때
+  // :placeholder-shown는 placeholder가 보일 때. 즉 인풋에 글자 입력 전을 선택할 때
+  &__input:placeholder-shown + &__label {
+    // 이거 두 개로 label을 안 보이게 가려놓고
+    opacity: 0;
+    visibility: hidden;
+    // 얘로 label을 4rem만큼 올려둔다. 글자가 입력되면 다시 원래대로 돌아옴
+    transform: translateY(-4rem);
+  }
+
+  &__radio-group {
+    width: 49%;
+    display: inline-block;
+  }
+
+  &__radio-input {
+    display: none;
+  }
+
+  &__radio-label {
+    font-size: $default-font-size;
+    cursor: pointer;
+    position: relative;
+    padding-left: 4.5rem;
+  }
+
+  &__radio-button {
+    height: 3rem;
+    width: 3rem;
+    border: 5px solid $color-primary;
+    border-radius: 50%;
+    // span은 inline 요소라서 block으로 바꿔야 지정한대로 동그라미 예쁘게 나온다.
+    display: inline-block;
+    position: absolute;
+    left: 0;
+    top: -0.4rem;
+
+    // ::after는 자식요소가 생성되게 해준다.
+    &::after {
+      // 그래서 ::after를 사용할 때는 content와 display를 꼭 추가해줘야한다.
+      content: "";
+      display: block;
+      height: 1.3rem;
+      width: 1.3rem;
+      border-radius: 50%;
+      // 얘의 부모의 position이 relative가 아니지만 괜찮다. 걍 뭘로 됐든 부모에 position이 지정만 되어있으면 된다.
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background-color: $color-primary;
+      opacity: 0;
+      transition: opacity 0.2s;
+    }
+  }
+
+  &__radio-input:checked ~ &__radio-label &__radio-button::after {
+    opacity: 1;
+  }
+}

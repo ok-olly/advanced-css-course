@@ -1,4 +1,6 @@
 .btn {
+  // 밑에 :link, :visited는 anchor 태그 기준이라서 button 태그도 이거 속성들을 사용할 수 있게 &를 추가해줬다.
+  &,
   /* 링크 기본 그 자체, 이미 방문한 링크 */
   &:link,
   &:visited {
@@ -12,6 +14,10 @@
     transition: all 0.2s;
     position: relative;
     font-size: $default-font-size;
+
+    // Change for the <button> element
+    border: none;
+    cursor: pointer;
   }
 
   /* 마우스 올렸을 때 */
@@ -27,8 +33,11 @@
     }
   }
 
-  /* 클릭했을 때 */
-  &:active {
+  /* :active는 클릭했을 때 */
+  // :focus는 선택되었을 떄
+  &:active,
+  &:focus {
+    outline: none;
     transform: translateY(-1px);
     box-shadow: 0 0.5rem 1rem rgba($color-black, 0.2);
   }

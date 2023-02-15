@@ -306,7 +306,94 @@
           <a href="#" class="btn-text">Read all stories &rarr;</a>
         </div>
       </section>
+
+      <section class="section-book">
+        <div class="row">
+          <div class="book">
+            <div class="book__form">
+              <form action="#" class="form">
+                <div class="u-margin-bottom-medium">
+                  <h2 class="heading-secondary">Start booking now</h2>
+                </div>
+
+                <div class="form__group">
+                  <input
+                    type="text"
+                    class="form__input"
+                    placeholder="Full Name"
+                    id="name"
+                    required
+                  />
+                  <label for="name" class="form__label">Full name</label>
+                </div>
+
+                <div class="form__group">
+                  <input
+                    type="email"
+                    class="form__input"
+                    placeholder="Email address"
+                    id="email"
+                    required
+                  />
+                  <label for="email" class="form__label">Email address</label>
+                </div>
+
+                <div class="form__group u-margin-bottom-medium">
+                  <!-- input 두 곳 모두 다 같은 name 애트리뷰트를 넣어야 둘 중에 하나만 선택이 된다. -->
+                  <div class="form__radio-group">
+                    <input
+                      type="radio"
+                      class="form__radio-input"
+                      id="small"
+                      name="size"
+                    />
+                    <!-- label 안에 span태그를 넣어서 css로 input 태그를 감춰버리고 사용자에 의해 label이 선택되면 라디오버튼처럼 꾸며진 span 태그부분이 표시되도록 한다.-->
+                    <label for="small" class="form__radio-label"
+                      ><span class="form__radio-button"></span> Small tour
+                      group</label
+                    >
+                  </div>
+
+                  <div class="form__radio-group">
+                    <input
+                      type="radio"
+                      class="form__radio-input"
+                      id="large"
+                      name="size"
+                    />
+                    <label for="large" class="form__radio-label"
+                      ><span class="form__radio-button"></span>Large tour
+                      group</label
+                    >
+                  </div>
+                </div>
+
+                <div class="form__group">
+                  <!-- form 안이라서 submit하려면 anchor가 아니라 찐 button이 필요하다.-->
+                  <button class="btn btn--green">Next step &rarr;</button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </section>
     </main>
+
+    <footer class="footer">
+      <div class="footer__logo-box">
+        <img src="img/logo-green-2x.png" alt="Full logo" class="footer__logo" />
+      </div>
+      <div class="row">
+        <div class="col-1-of-2">
+          <div class="footer__navigation">
+            <ul class="footer__list">
+              <li class="footer__item"><a href="" class="footer__link"></a></li>
+            </ul>
+          </div>
+        </div>
+        <div class="col-1-of-2"></div>
+      </div>
+    </footer>
     <!-- <section class="grid-te st">
       <div class="row">
         <div class="col-1-of-2">Col 1 of 2</div>
