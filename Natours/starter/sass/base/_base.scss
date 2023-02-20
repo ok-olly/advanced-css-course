@@ -8,9 +8,42 @@
 
 html {
   // This defines what 1rem is
+  // 1rem = 10px; 10px/16px = 62.5%
   font-size: 62.5%;
+
+  // @include respond-phone {
+  //   font-size: 50%;
+  // }
+
+  // 사이즈 순서가 중요하다. 만약 너비가 500px인 경우 tab-land와 tab-port모두 충족되는데 이 때 뒤에 적힌 코드가 적용되기 때문에 tab-port를 뒤쪽에 적어준다.
+  @include respond(tab-land) {
+    // width < 1200
+    // 화면 사이즈가 tab-land인 경우 1rem = 9px로 설정하고 싶은  경우, 9/16 = 56.25%
+    font-size: 56.25%;
+  }
+
+  @include respond(tab-port) {
+    // width < 900
+    // 화면 사이즈가 tab-port인 경우 1rem = 8px로 설정하고 싶은  경우, 8/16 = 50%
+    font-size: 50%;
+  }
+
+  // @include respond(phone) {
+  //   // 1rem = 4.8px
+  //   font-size: 30%;
+  // }
+
+  @include respond(big-desktop) {
+    // 화면 사이즈가 big-desktop인 경우 1rem = 12px로 설정하고 싶은  경우, 12/16 = 75%%
+    font-size: 75%;
+  }
 }
 
 body {
   box-sizing: border-box;
+  padding: 3rem;
+
+  @include respond(tab-port) {
+    padding: 0;
+  }
 }
