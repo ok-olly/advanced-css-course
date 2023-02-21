@@ -10,6 +10,16 @@
   font-size: $default-font-size;
   transform: skewX(-12deg);
 
+  @include respond(tab-port) {
+    width: 100%;
+    padding: 4rem;
+    padding-left: 7rem;
+  }
+
+  @include respond(phone) {
+    transform: skewX(0);
+  }
+
   //  찌그러진 모양 만드려고 .story에 transform: skewX(-12deg);넣고 자식요소 다 선택해서 반대로 입력하면 보통 해결되는데 이 파트 경우 자식요소 중에 __shape가 벌써 transform 프로퍼티를 가지고 있어서 skewX랑 translate가 동시에 적용이 안됨.. 그래서 어쩔 수 없이 걍 자식 요소마다 skewX(-12deg);를 직접 적어줘야함
   //   & > * {
   //     transform: skewX(12deg);
@@ -30,6 +40,10 @@
     // float된 거는 transform으로 마진 주는게 좋음
     transform: translateX(-3rem) skewX(12deg);
     position: relative;
+
+    @include respond(phone) {
+      transform: translateX(-3rem) skewX(0);
+    }
   }
 
   &__img {
@@ -42,6 +56,10 @@
 
   &__text {
     transform: skewX(12deg);
+
+    @include respond(phone) {
+      transform: skewX(0);
+    }
   }
 
   &__caption {

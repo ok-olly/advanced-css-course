@@ -419,7 +419,22 @@
 
     <footer class="footer">
       <div class="footer__logo-box">
-        <img src="img/logo-green-2x.png" alt="Full logo" class="footer__logo" />
+        <!-- <picture>는 안에 여러 이미지 소스를 넣어서 실제로는 그 중에 하나만 출력이 될 수 있게 해준다. -->
+        <!-- <source>든 <img>든 srcset에 그 여러 사진 소스를 넣을 수 있는데 주소 뒤에 공백과 1x나 2x를 같이 적어주면 브라우저가 알아서 화면 사이즈 파악해서 작은 화면이면 1x, 큰 화면이면 2x를 띄운다. -->
+        <!-- <source>는 media 애트리뷰트가 있는데 scss의 미디어쿼리처럼 max-width를 적어주고 화면 사이즈가 이 안에 들어가면 source에 적은 이미지가 출력되고 그렇지 않으면 얘바깥에 정의된 <img> 이미지가 출력된다. -->
+        <picture class="footer__logo">
+          <source
+            srcset="
+              img/logo-green-small-1x.png 1x,
+              img/logo-green-small-2x.png 2x
+            "
+            media="(max-width:37.5em)"
+          />
+          <img
+            srcset="img/logo-green-1x.png 1x, img/logo-green-2x.png 2x"
+            alt="Full logo"
+          />
+        </picture>
       </div>
       <div class="row">
         <div class="col-1-of-2">
