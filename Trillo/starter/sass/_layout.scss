@@ -1,0 +1,55 @@
+.container {
+  max-width: 120rem;
+  margin: 8rem auto;
+  background-color: var(--color-grey-light-1);
+  box-shadow: var(--shadow-dark);
+
+  // 얘도 임시 확인용
+  min-height: 50rem;
+}
+
+.header {
+  font-size: 1.4rem;
+  height: 7rem;
+  background-color: #fff;
+  border-bottom: var(--color-grey-light-2);
+
+  // 부모요소인 header에 flex를 넣어서 자식요소인 img, form, nav를 나눈다.
+  display: flex;
+  // 얘로 자식요소인 img, form, nav를 horizontal 정렬한다.
+  justify-content: space-between;
+  // 얘로 자식요소인 img, form, nav를 vertical 정렬한다.
+  align-items: center;
+}
+
+.content {
+  // 부모요소에 flex를 넣어서 자식요소인 사이드바와 호텔뷰 부분을 양쪽으로 나눈다.
+  display: flex;
+}
+
+.sidebar {
+  background-color: var(--color-grey-dark-1);
+
+  // flex: grow shrink basis 순이다.
+  // flex-grow: 화면이 커져서 여백이 생길 경우 자식요소1을 어떤 비율로 늘릴 건지(0이면 안 늘림)
+  // flex-shrink: 화면이 작아져서 얘가 들어갈 자리마저 부족해지면 자식요소1을 어떤 비율로 줄일 건지(0이면 안 줄임)
+  // flex-basis: 자식요소1의 기본 사이즈
+  flex: 0 0 18%;
+
+  display: flex;
+  // 메인 방향이 가로가 아니라 세로가 되었다.
+  flex-direction: column;
+  // sidebar의 자식요소인 side-nav와 legal을 양끝(여기서는 위아래)으로 띄워둔다.
+  justify-content: space-between;
+}
+
+.hotel-view {
+  background-color: #fff;
+
+  // 임시 확인용
+  background-color: orangered;
+  height: 80rem;
+
+  // flex-grow: 1;이라서 남은 여백 다 가져간다.
+  flex: 1;
+}

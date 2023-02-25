@@ -1,0 +1,152 @@
+////////////////////////////
+// LOGO
+.logo {
+  height: 3.25rem;
+  margin-left: 2rem;
+}
+
+////////////////////////////
+// SEARCH
+.search {
+  flex: 0 0 40%;
+
+  // 부모요소인 search에 flex를 지정해서 자식요소인 input과 button을 정렬
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  &__input {
+    font-family: inherit;
+    font-size: inherit;
+    color: inherit;
+    background-color: var(--color-grey-light-2);
+    border: none;
+    padding: 0.7rem 2rem;
+    border-radius: 100px;
+    width: 90%;
+    transition: all 0.2s;
+    margin-right: -3.25rem;
+
+    &:focus {
+      outline: none;
+      width: 100%;
+      background-color: var(--color-grey-light-3);
+    }
+
+    &::placeholder {
+      font-weight: 100;
+      color: var(--color-grey-light-4);
+    }
+  }
+
+  // input에 focus되면 버튼 배경색을 변경한다.
+  &__input:focus + &__button {
+    background-color: var(--color-grey-light-3);
+  }
+
+  &__button {
+    border: none;
+    background-color: var(--color-grey-light-2);
+
+    &:focus {
+      outline: none;
+    }
+
+    &:active {
+      transform: translateY(2px);
+    }
+  }
+
+  &__icon {
+    height: 2rem;
+    width: 2rem;
+    // 돋보기 아이콘 색 변경
+    fill: var(--color-grey-dark-3);
+  }
+}
+
+////////////////////////////
+// USER NAVIGATION
+.user-nav {
+  // 2) 그래서 부모태그에 align-self: stretch로 펼쳐주고
+  align-self: stretch;
+
+  display: flex;
+  // 자식 요소에 손수 align-item을 따로 다 넣어줘서 얘는 필요없을듯
+  //   align-items: center;
+
+  // 부모태그인 user-nav의 직계 자식요소인 __icon-box와 __user를 한번에 선택한다.
+  // 3) 이 자식요소들의 높이를 100%로 설정하고나면 마우스 호버했을 때 회색이 헤더 높이만큼 채워지는건 해결했는데 안에 넣은 아이콘이랑 사진 정렬이 흐트러져있음
+  & > * {
+    padding: 0 2rem;
+    cursor: pointer;
+    height: 100%;
+    // 4) 자식요소에 이렇게 두 개 추가하면 해결
+    display: flex;
+    align-items: center;
+  }
+
+  // 1) 이렇게 하면 헤더 높이만큼 회색으로 바뀌는게 아니라 요소가 있는 부분만 색이 바뀐다.
+  & > *:hover {
+    background-color: var(--color-grey-light-2);
+  }
+
+  &__icon-box {
+    // b) 박스 자체를 기준으로 조정하면 편하니까 position: relative 추가
+    position: relative;
+  }
+
+  &__icon {
+    height: 2.25rem;
+    width: 2.25rem;
+    fill: var(--color-grey-dark-2);
+  }
+
+  &__notification {
+    font-size: 0.8rem;
+    height: 1.75rem;
+    width: 1.75rem;
+    border-radius: 50%;
+    background-color: var(--color-primary);
+    color: #fff;
+    // a) 숫자영역을 아이콘 기준으로 위치를 조정하려고 position: absolute사용
+    position: absolute;
+    top: 1.5rem;
+    right: 1.1rem;
+
+    // 숫자 자체를 숫자영역 안에서 가운데 정렬
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  &__user-photo {
+    height: 3.75rem;
+    border-radius: 50%;
+    margin-right: 1rem;
+  }
+}
+
+////////////////////////////
+// SIDE NAVIGATION
+.side-nav {
+  &__item {
+  }
+
+  &__link {
+  }
+
+  &__icon {
+    width: 1.75rem;
+    height: 1.75rem;
+  }
+}
+
+////////////////////////////
+// LEGAL TEXT
+.legal {
+  font-size: 1.2rem;
+  color: var(--color-grey-light-4);
+  text-align: center;
+  padding: 2.5rem;
+}
