@@ -130,15 +130,70 @@
 ////////////////////////////
 // SIDE NAVIGATION
 .side-nav {
+  font-size: 1.4rem;
+  list-style: none;
+  margin-top: 3.5rem;
+
   &__item {
+    position: relative;
+
+    &:not(:last-child) {
+      margin-bottom: 0.5rem;
+    }
   }
 
-  &__link {
+  &__item::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 3px;
+    background-color: var(--color-primary);
+    transform: scaleY(0);
+    // transform을 0.2초동안 진행하고 width를 0.2초 뒤에 0.4초동안 실행한다.
+    // cubic-bezier는 진행 스타일
+    transition: transform 0.2s, width 0.4s cubic-bezier(1, 0, 0, 1) 0.2s,
+      background-color 0.1s;
   }
+
+  // home메뉴는 active로 만드려고 html 클래스에 item--active를 추가하고 여기서는 ::before 클래스를 달아줬다.
+  &__item:hover::before,
+  &__item--active::before {
+    transform: scaleY(1);
+    width: 100%;
+  }
+
+  &__item:active::before {
+    background-color: var(--color-primary-light);
+  }
+
+  &__link:link,
+  &__link:visited {
+    color: var(--color-grey-light-1);
+    text-decoration: none;
+    text-transform: uppercase;
+    display: block;
+    padding: 1.5rem 3rem;
+    // z-index는 position을 지정해야만 작동한다.
+    position: relative;
+    z-index: 10;
+
+    display: flex;
+    align-items: center;
+  }
+
+  // 이렇게 지정하면 자식요소인 icon의 currentColor 덕분에 icon:hover 어쩌구 이런거 지정 안 해도 아이콘도 알아서 orangered로 색이 변경된다.
+  // &__link:hover {
+  //   color: orangered;
+  // }
 
   &__icon {
     width: 1.75rem;
     height: 1.75rem;
+    margin-right: 2rem;
+    // currentColor는 자기 자신이나 부모 요소의 색을 따라간다.
+    fill: currentColor;
   }
 }
 
@@ -150,3 +205,144 @@
   text-align: center;
   padding: 2.5rem;
 }
+
+////////////////////////////
+// GALLERY
+.gallery {
+  display: flex;
+
+  &__photo {
+    width: 100%;
+    display: block;
+  }
+}
+
+////////////////////////////
+// HOTEL OVERVIEW
+.overview {
+  display: flex;
+  align-items: center;
+  border-bottom: var(--line);
+
+  &__heading {
+    font-size: 2.25rem;
+    font-weight: 300;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    padding: 1.5rem 3rem;
+  }
+
+  // stars와 location 사이에 여백이 많은데 stars에 flex:1을 줘서 해결
+  // flex: 1은 풀어서 보면
+  // flex-grow: 1;
+  // flex-shrink: 1;
+  // flex-basis: 0%
+  // 근데 flex: 1을 사용하면 사진처럼 돼서 hover이벤트같은거 만들 때 생각한대로 안될 것.. 그래서 flex:1말고 margin-right: auto를 사용한다.
+  // location에 margin-left:auto 써도 똑같은 결과
+  &__stars {
+    // flex: 1;
+    margin-right: auto;
+    // 별 하나하나가 inline element처럼 작용해서 (별 및에 하얀 공간이 조금씩 남음) 부모요소인 stars에 display: flex를 주면 자식요소들 높이에 따라 부모요소의 높이가 결정된다.
+    display: flex;
+  }
+
+  &__icon-star,
+  &__icon-location {
+    width: 1.75rem;
+    height: 1.75rem;
+    fill: var(--color-primary);
+  }
+
+  &__location {
+    font-size: 1.2rem;
+    display: flex;
+    align-items: center;
+  }
+
+  &__icon-location {
+    margin-right: 0.5rem;
+  }
+
+  &__rating {
+    background-color: var(--color-primary);
+    color: #fff;
+    margin-left: 3rem;
+    padding: 0 2.25rem;
+    // 핑크색 배경 색을 위아래 끝까지 닿게 채워주려고
+    align-self: stretch;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+
+  &__rating-average {
+    font-size: 2.25rem;
+    font-weight: 300;
+    margin-bottom: -3px;
+  }
+
+  &__rating-count {
+    font-size: 0.8rem;
+    text-transform: uppercase;
+  }
+}
+
+////////////////////////////
+// BUTTON INLINE
+.btn-inline {
+  border: none;
+  color: var(--color-primary);
+  // 다른 곳에서도 버튼이 있기 때문에 재사용을 하기 위해서 부모요소에만 폰트 사이즈를 지정해두면 btn-inline 클래스를 가지고 있는 버튼 요소는 부모요소의 폰트 사이즈를 따라간다.
+  font-size: inherit;
+  border-bottom: 1px solid currentColor;
+  padding-bottom: 2px;
+  display: inline-block;
+  background-color: transparent;
+  cursor: pointer;
+  transition: all 0.2s;
+
+  &:hover {
+    color: var(--color-grey-dark-1);
+  }
+
+  &:focus {
+    outline: none;
+    // 애니메이션은 한 번 실행되고 나면 끝인데 infinite를 달아주면 계속 실행된다. 아니 근데 한번 클릭하면 계속 깜빡거리고 밖에 눌러줘서 멈추네 이게 뭐냐..
+    animation: pulsate 1s infinite;
+  }
+}
+
+@keyframes pulsate {
+  0% {
+    transform: scale(1);
+    box-shadow: none;
+  }
+
+  50% {
+    transform: scale(1.05);
+    box-shadow: 0 1rem 4rem rgba(0, 0, 0.25);
+  }
+
+  100% {
+    transform: scale(1);
+    box-shadow: none;
+  }
+}
+
+////////////////////////////
+// PARAGRAPH
+// .paragragh:not(:last-child) {
+//   margin-bottom: 2rem;
+// }
+
+.paragragh:last-child {
+  font-style: italic;
+}
+
+////////////////////////////
+// LIST
+
+////////////////////////////
+// RECOMMEND
