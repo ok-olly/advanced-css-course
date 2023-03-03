@@ -430,16 +430,19 @@
     margin-right: 0.7rem;
 
     // Older browsers
-    // background-image: url(../img/chevron-thin-right.svg);
-    // background-size: cover;
+    background-image: url(../img/chevron-thin-right.svg);
+    background-size: cover;
 
     // Newer browsers - masks
     // 배경색을 지정하고 mask-image로 원하는 그림을 넣으면 그 그림 모양대로만 배경색이 비쳐나온다.
-    background-color: var(--color-primary);
-    -webkit-mask-image: url(../img/chevron-thin-right.svg);
-    -webkit-mask-size: cover;
-    mask-image: url(../img/chevron-thin-right.svg);
-    mask-size: cover;
+    @supports (-webkit-mask-image: url()) or (mask-image: url()) {
+      background-color: var(--color-primary);
+      -webkit-mask-image: url(../img/chevron-thin-right.svg);
+      -webkit-mask-size: cover;
+      mask-image: url(../img/chevron-thin-right.svg);
+      mask-size: cover;
+      background-image: none;
+    }
   }
 }
 
