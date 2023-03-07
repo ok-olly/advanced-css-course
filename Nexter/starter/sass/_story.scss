@@ -2,10 +2,50 @@
   &__pictures {
     background-color: $color-primary;
     grid-column: full-start / col-end 4;
+    background-image: linear-gradient(
+        rgba($color-primary, 0.5),
+        rgba($color-primary, 0.5)
+      ),
+      url(../img/back.jpg);
+
+    display: grid;
+    grid-template-rows: repeat(6, 1fr);
+    grid-template-columns: repeat(6, 1fr);
+    // 기본값이 stretch라서 그냥 div같은거는 지정된 영역을 꽉 채우지만 img는 자신의 비율을 맞추려고 하기 때문에 stretch가 되지 않는다. 그래도 뭐 가운데 정렬이라도 하려고 center를 지정해줬다.
+    align-items: center;
+  }
+
+  &__img--1 {
+    width: 100%;
+    grid-row: 2 / 6;
+    grid-column: 2 / 6;
+    box-shadow: 0 2rem 5rem rgba(#000, 0.1);
+  }
+
+  &__img--2 {
+    // 그리드 바깥으로 빼꼼 보이게 하려고 너비를 조금 넓여줬다.
+    width: 115%;
+    grid-row: 4 / 6;
+    grid-column: 4 / 7;
+    // 그리드 바깥으로 나가는 부분은 가려지기 때문에 보이게 하려고 z-index를 크게 지정해줬다.
+    z-index: 20;
+    box-shadow: 0 2rem 5rem rgba(#000, 0.2);
   }
 
   &__content {
     background-color: $color-grey-light-1;
     grid-column: col-start 5 / full-end;
+
+    padding: 6rem 8vw;
+
+    display: grid;
+    align-content: center;
+    justify-items: start;
+  }
+
+  &__text {
+    font-size: 1.5rem;
+    font-style: italic;
+    margin-bottom: 4rem;
   }
 }
